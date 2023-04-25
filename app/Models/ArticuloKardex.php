@@ -66,4 +66,30 @@ class ArticuloKardex extends Model
 
         return $json_arrays;
     }
+
+    public static function InitKardex(Request $request){
+        try {
+            $datos_a_insertar = array();    
+            $Articulos = Articulos::getArticulos();
+            ArticuloKardex::where('USUARIO', Auth::id())->delete();
+            foreach ($Articulos as $key => $val) {
+                $datos_a_insertar[$key]['ID_ART']           = $val->ID;
+                $datos_a_insertar[$key]['ARTICULO']         = $val->ARTICULO;
+                $datos_a_insertar[$key]['DESCRIPCION']      = $val->DESCRIPCION;
+                $datos_a_insertar[$key]['ENTRADA']          = 0;
+                $datos_a_insertar[$key]['SALIDA']           = 0;
+                $datos_a_insertar[$key]['STOCK']            = $val->CANTIDAD;
+                $datos_a_insertar[$key]['TIPO_MOVIMIENTO']  = 'In';
+                $datos_a_insertar[$key]['FECHA']            = date('Y-m-d');
+                $datos_a_insertar[$key]['USUARIO']          = Auth::id();
+                $datos_a_insertar[$key]['created_at']       = date('Y-m-d H:i:s');
+                
+            }
+            ArticuloKardex::insert($datos_a_insertar); 
+            
+        } catch (Exception $e) {
+            $mensaje =  'Excepción capturada: ' . $e->getMessage() . "\n";
+            return response()->json($mensaje);
+        }
+    }
 }

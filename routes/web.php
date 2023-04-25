@@ -22,6 +22,7 @@ Route::get('Articulos', 'InventarioController@getHome')->name('Home');
 Route::post('GuardarCantidad', 'InventarioController@GuardarCantidad')->name('GuardarCantidad');
 Route::post('postKardex', 'InventarioController@postKardex')->name('postKardex');
 Route::post('getKardex', 'InventarioController@getKardex')->name('getKardex');
+Route::get('InitKardex', 'InventarioController@InitKardex')->name('InitKardex');
 
 Route::get('Usuarios', 'UsuarioController@getUsuarios')->name('Usuarios');
 Route::post('SaveUsuario', 'UsuarioController@SaveUsuario')->name('SaveUsuario');

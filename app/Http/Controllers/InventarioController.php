@@ -28,6 +28,11 @@ class InventarioController extends Controller {
         $response = ArticuloKardex::getKardex($request);
         return response()->json($response);
     }
+    public function InitKardex(Request $request)
+    {
+        ArticuloKardex::InitKardex($request);
+    }
+
     public function getKardex(Request $request)
     {
         $d1 = $request->input('startDate');
